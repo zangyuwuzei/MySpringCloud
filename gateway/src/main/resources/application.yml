@@ -1,0 +1,58 @@
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9081/eureka/
+  instance:
+    #    hostname: localhost
+    #    配置面板跳转到swagger接口页面
+    status-page-url: http://localhost:${server.port}/swagger-ui.html
+server:
+  port: 9082
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 1000
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+  application:
+    name: gateway
+  cloud:    # spring cloud gateway 路由配置方式
+    gateway:
+      discovery:   #是否与服务发现组件进行结合，通过 serviceId(必须设置成大写) 转发到具体的服务实例。默认为false，设为true便开启通过服务中心的自动根据 serviceId 创建路由的功能。
+        locator:   #路由访问方式：http://Gateway_HOST:Gateway_PORT/大写的serviceId/**，其中微服务应用名默认大写访问。
+          enabled: true
+      routes:
+        - id: security
+          uri: lb://security
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+
+        - id: security2
+          uri: lb://security
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+jwt:
+  secret: secret
+  expiration: 604800
+  header: Authorization
+
+

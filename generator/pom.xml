@@ -10,13 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>generator</artifactId>
-   <!-- 引用项目仓库
+    <!--引用项目仓库-->
     <repositories>
         <repository>
             <id>localrepository</id>
             <url>file:\\${basedir}\repo</url>
         </repository>
-    </repositories>-->
+    </repositories>
 
     <dependencies>
 
@@ -27,7 +27,7 @@
             <version>1.0</version>
             <!--<scope>test</scope>-->
             <scope>system</scope>
-            <systemPath>${project.basedir}\repo\zywz\generator\1.0\generator.jar</systemPath>
+<!--            <systemPath>${project.basedir}\repo\zywz\generator\1.0\generator.jar</systemPath>-->
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
